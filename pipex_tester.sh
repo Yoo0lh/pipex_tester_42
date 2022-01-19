@@ -10,9 +10,11 @@ file1="../fileteste"
 file2="../file3"
 
 echo "${yel}========================= ${pur}PIPEX TESTER ${yel}========================="
+mandatory () {
 #test 1
-if [ "$1" == "m" ]; then
 echo "${gre_2}mandatory part :"
+make fclean -C ../ 1> /dev/null
+make -C ../ 1> /dev/null
 ../pipex ../file "cat" "grep name" ../file3; cat ../file | grep "name" > tests/testm1 ;
 if [[ $(diff --brief <(sort "$file2") <(sort "tests/testm1")) ]] ; then
 	echo "${red}1. KO${yel}"
@@ -51,8 +53,33 @@ if [[ $(diff --brief <(sort "$file2") <(sort "tests/testm5")) ]] ; then
 else
 	echo "${grn}5. OK${yel}"
 fi
+}
+bonus () {
+echo "${gre_2}bonus part multi pipes :"
+make fclean -C ../ 1> /dev/null
+make bonus -C ../ 1> /dev/null
+#test 1
+../pipex ../file "cat" "grep name" "grep -E s$" "wc -l" ../file3; cat ../file | grep name | grep -E s$ | wc -l > tests/testb1;
+if [[ $(diff --brief <(sort "$file2") <(sort "tests/testb1")) ]] ; then
+	echo "${red}1. KO${yel}"
+else
+	echo "${grn}1. OK${yel}"
+fi 
+../pipex ../file "cat" "grep name" "grep -E s$" ../file3; cat ../file | grep name | grep -E s$  > tests/testb2;
+if [[ $(diff --brief <(sort "$file2") <(sort "tests/testb2")) ]] ; then
+	echo "${red}2. KO${yel}"
+else
+	echo "${grn}2. OK${yel}"
+fi
+}
+if [ "$1" == "a" ]; then
+	mandatory
+	bonus
+fi
+if [ "$1" == "m" ]; then
+	mandatory
 fi
 if [ "$1" == "b" ]; then
-echo "${gre_2}bonus part multi pipes :"
+	bonus
 fi
 echo "${yel}============================== ${pur}END ${yel}============================="

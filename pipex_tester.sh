@@ -101,8 +101,8 @@ fi
 here_doc(){
 echo "${gre_2}bonus part here_doc :"
 make fclean -C ../ 1> /dev/null
-make -C ../ 1> /dev/null
-../pipex here_doc EOF "cat" "grep -i e" "$here_doc"1;
+make bonus -C ../ 1> /dev/null
+../pipex here_doc EOF "cat" "grep -i e" "$here_doc"1
 new
 me
 life

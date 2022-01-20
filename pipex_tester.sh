@@ -31,7 +31,7 @@ else
 fi
 #sleep 0.3
 #test 3
-../pipex ../file "grep name" "wc -l" ../file3; cat ../file | grep "name" | wc -l > tests/testm3;
+../pipex ../file "grep name" "sort" ../file3; cat ../file | grep "name" | sort > tests/testm3;
 if [[ $(diff --brief <(sort "$file2") <(sort "tests/testm3")) ]] ; then
 	echo "${red}3. KO${yel}"
 else
@@ -39,7 +39,7 @@ else
 fi
 #sleep 0.3
 #test 4
-../pipex ../file "cat" "wc -l" ../file3; cat ../file | wc -l > tests/testm4;
+../pipex ../file "grep -i s" "wc -l" ../file3; cat ../file | grep -i s | wc -l > tests/testm4;
 if [[ $(diff --brief <(sort "$file2") <(sort "tests/testm4")) ]] ; then
 	echo "${red}4. KO${yel}"
 else
@@ -55,7 +55,7 @@ else
 fi
 }
 bonus () {
-echo "${gre_2}bonus part multi pipes :"
+echo "${gre_2}bonus part multiple pipes :"
 make fclean -C ../ 1> /dev/null
 make bonus -C ../ 1> /dev/null
 #test 1
@@ -70,6 +70,24 @@ if [[ $(diff --brief <(sort "$file2") <(sort "tests/testb2")) ]] ; then
 	echo "${red}2. KO${yel}"
 else
 	echo "${grn}2. OK${yel}"
+fi
+../pipex ../file "cat" "grep -v a" "grep -E s$" ../file3; cat ../file | grep -v a | grep -E s$ > tests/testb3; 
+if [[ $(diff --brief <(sort "$file2") <(sort "tests/testb3")) ]] ; then
+	echo "${red}3. KO${yel}"
+else
+	echo "${grn}3. OK${yel}"
+fi
+../pipex ../file "cat" "grep -i s" "sort" "head -n 3" "uniq" "tail -5" "wc -l" ../file3; cat ../file | grep -i s | sort | head -n 3 | uniq |tail -5 | wc -l > tests/testb4;
+if [[ $(diff --brief <(sort "$file2") <(sort "tests/testb4")) ]] ; then
+	echo "${red}4. KO${yel}"
+else
+	echo "${grn}4. OK${yel}"
+fi
+../pipex ../file "cat" "grep -i s" "head -n 3" "sort"  "uniq" "tail -5" ../file3; cat ../file | grep -i s | head -n 3 | sort | uniq |tail -5  > tests/testb5;
+if [[ $(diff --brief <(sort "$file2") <(sort "tests/testb5")) ]] ; then
+	echo "${red}5. KO${yel}"
+else
+	echo "${grn}5. OK${yel}"
 fi
 }
 if [ "$1" == "a" ]; then

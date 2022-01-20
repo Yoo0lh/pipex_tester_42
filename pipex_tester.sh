@@ -109,7 +109,7 @@ life
 toto
 lolo
 EOF
-cat << EOF | grep -i e >> "$output_here"
+cat << EOF | grep -i e >> "$output_here"1
 new
 me
 toto
@@ -120,20 +120,23 @@ if [[ $(diff --brief <(sort "$here_doc"1) <(sort "$output_here"1)) ]] ; then
 else
 	echo "${grn}5. OK${yel}"
 fi
-../pipex here_doc EOF "cat" "grep -E a$" "$here_doc"1;
-new
-me
+../pipex here_doc EOF "cat" "grep -E a$" "$here_doc"2
+abaca
 life
+abuna
 toto
 lolo
+agama
 EOF
-cat << EOF | grep -E a$ >> "$output_here"
-new
-me
+cat << EOF | grep -E a$ >> "$output_here"2
+abaca
+life
+abuna
 toto
 lolo
+agama
 EOF
-if [[ $(diff --brief <(sort "$here_doc"1) <(sort "$output_here"1)) ]] ; then
+if [[ $(diff --brief <(sort "$here_doc"2) <(sort "$output_here"2)) ]] ; then
 	echo "${red}5. KO${yel}"
 else
 	echo "${grn}5. OK${yel}"

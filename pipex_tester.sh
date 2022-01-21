@@ -130,6 +130,7 @@ fi
 if [ "$1" == "a" ]; then
 	mandatory
 	bonus
+	here_doc
 fi
 if [ "$1" == "m" ]; then
 	mandatory

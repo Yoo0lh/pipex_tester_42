@@ -102,13 +102,7 @@ here_doc(){
 echo "${gre_2}bonus part here_doc :"
 make fclean -C ../ 1> /dev/null
 make bonus -C ../ 1> /dev/null
-../pipex here_doc EOF "cat" "grep -i e" "$here_doc"1
-new
-me
-life
-toto
-lolo
-EOF
+( (echo "hello"; echo "emim"; echo "nice"; echo "test"; echo "my life"; echo "EOF") | ../pipex here_doc EOF "cat" "grep -i e" "$here_doc"1) > /dev/null;
 cat << EOF | grep -i e >> "$output_here"1
 new
 me
@@ -116,19 +110,12 @@ toto
 lolo
 EOF
 if [[ $(diff --brief <(sort "$here_doc"1) <(sort "$output_here"1)) ]] ; then
-	echo "${red}5. KO${yel}"
+	echo "${red}1. KO${yel}"
 else
-	echo "${grn}5. OK${yel}"
+	echo "${grn}1. OK${yel}"
 fi
-../pipex here_doc EOF "cat" "grep -E a$" "$here_doc"2
-abaca
-life
-abuna
-toto
-lolo
-agama
-EOF
-cat << EOF | grep -E a$ >> "$output_here"2
+( (echo "hello" ; echo "im not"; echo "life"; echo "EOF") | ../pipex here_doc EOF "cat" "wc -l" "$here_doc"2) > /dev/null;
+cat << EOF | wc -l >> "$output_here"2
 abaca
 life
 abuna
@@ -137,9 +124,9 @@ lolo
 agama
 EOF
 if [[ $(diff --brief <(sort "$here_doc"2) <(sort "$output_here"2)) ]] ; then
-	echo "${red}5. KO${yel}"
+	echo "${red}2. KO${yel}"
 else
-	echo "${grn}5. OK${yel}"
+	echo "${grn}2. OK${yel}"
 fi
 }
 if [ "$1" == "a" ]; then

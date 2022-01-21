@@ -104,10 +104,11 @@ make fclean -C ../ 1> /dev/null
 make bonus -C ../ 1> /dev/null
 ( (echo "hello"; echo "emim"; echo "nice"; echo "test"; echo "my life"; echo "EOF") | ../pipex here_doc EOF "cat" "grep -i e" "$here_doc"1) > /dev/null;
 cat << EOF | grep -i e >> "$output_here"1
-new
-me
-toto
-lolo
+hello
+emim
+nice
+test
+my life
 EOF
 if [[ $(diff --brief <(sort "$here_doc"1) <(sort "$output_here"1)) ]] ; then
 	echo "${red}1. KO${yel}"
@@ -116,12 +117,9 @@ else
 fi
 ( (echo "hello" ; echo "im not"; echo "life"; echo "EOF") | ../pipex here_doc EOF "cat" "wc -l" "$here_doc"2) > /dev/null;
 cat << EOF | wc -l >> "$output_here"2
-abaca
+hello
+im not
 life
-abuna
-toto
-lolo
-agama
 EOF
 if [[ $(diff --brief <(sort "$here_doc"2) <(sort "$output_here"2)) ]] ; then
 	echo "${red}2. KO${yel}"

@@ -1,7 +1,8 @@
 # tester for 42 project 
 this tester check if your pipex program work or not.</br>
-
+>Note that the tester doesn't check the norm or leak memory
 ## How do i run this tester ?
+
 <pre>git clone git@github.com:Yoo0lh/pipex_tester_42.git </br>./pipex_tester.sh [mode]
 </pre>
 modes :

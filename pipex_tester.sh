@@ -125,7 +125,7 @@ else
 fi
 sleep 0.3
 #test 2
-( (echo "hello" ; echo "im not"; echo "life"; echo "EOF") | ../pipex here_doc EOF "cat" "wc -l" "$here_doc"2) > /dev/null &&
+( (echo "hello" ; echo "im not"; echo "life"; echo "EOF") | ../pipex here_doc EOF "cat" "wc -l" "$here_doc"2) > /dev/null ;
 cat << EOF | wc -l >> "$output_here"2
 hello
 im not
@@ -136,20 +136,14 @@ if [[ $(diff --brief <(sort "$here_doc"2) <(sort "$output_here"2)) ]] ; then
 else
 	echo "${grn}2. OK${yel}"
 fi
-for i in {1..2}; do rm -f "$here_doc"$i rm -f "$output_here"$i; done
+#for i in {1..2}; do rm -f "$here_doc"$i rm -f "$output_here"$i; done
 }
-if [ "$1" == "a" ]; then
-	mandatory
-	bonus
-	here_doc
+if [ "$1" == "a" ]; then 
+	mandatory 
+	bonus 
+	here_doc 
 fi
-if [ "$1" == "m" ]; then
-	mandatory
-fi
-if [ "$1" == "b" ]; then
-	bonus
-fi
-if [ "$1" == "h" ]; then
-	here_doc
-fi
+if [ "$1" == "m" ]; then mandatory ; fi
+if [ "$1" == "b" ]; then bonus ; fi
+if [ "$1" == "h" ]; then here_doc ; fi
 echo "${yel}============================== ${pur}END ${yel}============================="

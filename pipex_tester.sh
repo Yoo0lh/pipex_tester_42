@@ -136,7 +136,7 @@ if [[ $(diff --brief <(sort "$here_doc"2) <(sort "$output_here"2)) ]] ; then
 else
 	echo "${grn}2. OK${yel}"
 fi
-#for i in {1..2}; do rm -f "$here_doc"$i rm -f "$output_here"$i; done
+for i in {1..2}; do rm -f "$here_doc"$i rm -f "$output_here"$i; done
 }
 if [ "$1" == "a" ]; then 
 	mandatory 

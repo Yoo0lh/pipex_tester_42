@@ -110,7 +110,7 @@ echo "${gre_2}bonus part here_doc :"
 make fclean -C ../ 1> /dev/null
 make bonus -C ../ 1> /dev/null
 #test 2
-( (echo "hello"; echo "emim"; echo "nice"; echo "test"; echo "my life"; echo "EOF") | ../pipex here_doc EOF "cat" "grep -i e" "$here_doc"1) > /dev/null &&
+( (echo "hello"; echo "emim"; echo "nice"; echo "test"; echo "my life"; echo "EOF") | ../pipex here_doc EOF "cat" "grep -i e" "$here_doc"1) > /dev/null ;
 cat << EOF | grep -i e >> "$output_here"1
 hello
 emim

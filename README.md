@@ -13,9 +13,9 @@ h : bonus here doc
 a : all
 </pre>
 ### example :
-this example will run the mandatory part
-<pre> ./pipex_tester m </pre>
-<img src="screen_shot.png">
+this example will run the tester with all parts 
+<pre> ./pipex_tester a </pre>
+<img src="img/pipex.png">
 
 # Contribution
 If you noticed something wrong with the code or if you'd like to see a new feature, you can submit an issue. If you'd like to contribute please submit a pull request. 

@@ -138,12 +138,13 @@ else
 fi
 for i in {1..2}; do rm -f "$here_doc"$i rm -f "$output_here"$i; done
 }
-if [ "$1" == "a" ]; then 
+if [ "$*" == "" ]; then echo "${red}No arguments provided"
+elif [ "$1" == "a" ]; then 
 	mandatory 
 	bonus 
 	here_doc 
-fi
-if [ "$1" == "m" ]; then mandatory ; fi
-if [ "$1" == "b" ]; then bonus ; fi
-if [ "$1" == "h" ]; then here_doc ; fi
+elif [ "$1" == "m" ]; then mandatory 
+elif [ "$1" == "b" ]; then bonus
+elif [ "$1" == "h" ]; then here_doc
+else echo "${red}The argumments does not exist" ; fi
 echo "${yel}============================== ${pur}END ${yel}============================="
